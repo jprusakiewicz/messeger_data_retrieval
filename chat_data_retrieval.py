@@ -7,18 +7,12 @@ acc_token = '&access_token=EAAjc4szTP2ABANM2ZAX7BR65Uo8EHSkmQF54GEcSVEhZAx6tXpZC
 conversation = 'https://graph.facebook.com/v3.3/108525050657214/conversations?fields=participants%2Clink%2cmessages{{message}}{0}'.format(acc_token)
 r = requests.get(conversation)
 
-#print(r.json()['data'][0])
-#print(r.json()['data'][1]) #not all data ->care for next
 conv_data = r.json()['data']
 data_json = {}
 mes = []
 person = []
 for i in range(0, len(conv_data)):  #foreach person
     conv_id = conv_data[i]['id']
-    #print(conv_data[i]['id'])
-    #print(conv_data[i]['messages']['data'])
-    #print(conv_data[i]['participants']['data'])
-    #r_conv = requests.get('https://graph.facebook.com/v3.3/108525050657214/{0}'.format(acc_token))
     person.append(conv_data[i]['participants']['data'][0]['name'])
     mes.append((conv_data[i]['messages']['data']))
 
@@ -27,7 +21,6 @@ for i in range(0, len(mes)):
     new_mes[person[i]] = mes[i]
 
 for key in new_mes.values():
-    #print(new_mes.iteritems())
     for i in range(len(key)):
         key[i] = key[i]['message'] #ecstract message only
 
