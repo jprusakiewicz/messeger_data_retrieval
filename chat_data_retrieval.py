@@ -10,6 +10,7 @@ r = requests.get(conversation)
 print(r.json()['data'][0])
 print(r.json()['data'][1]) #not all data ->care for next
 conv_data = r.json()['data']
+data_json = {}
 mes = []
 person = []
 for i in range(0, len(conv_data)):  #dla każdego rozmówcy
@@ -40,8 +41,27 @@ j = 0 #person index
 for i in range(0, len(mes[j])):
     print(mes[j][i]['message']) #print all from person index
 
-for i in range (0, len(mes)):
+new_mes = {}
+print("all")
+for i in range(0, len(mes)):
     print("person: {}".format(person[i]))
-    for i in range(0, len(mes[i])):
-        print(mes[j][i]['message']) #print all for all
+    # new_mes[person[i]] = mes[i][0]['message'] #dont touch
+    new_mes[person[i]] = mes[i]
+    #for j in range(0, len(mes[i])):
+       #print(mes[i][j]['message']) #print all for all
+        #new_mes[i] += mes[i][j]['message']
+
+
+for key in new_mes.values():
+    #print(new_mes.iteritems())
+    for i in range(len(key)):
+        key[i] = key[i]['message']
+
+
+#j_per = json.dumps(new_mes, ensure_ascii=False)
+#print(j_per)
+with open('data.txt', 'w', encoding='utf-8') as outfile:
+     json.dump(new_mes, outfile, ensure_ascii=False)
+
+
 
