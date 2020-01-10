@@ -4,7 +4,7 @@ with open('raw_request_history.txt') as json_file:
     data = json.load(json_file) #data is a list of dits
 
 for dict in data:
-    conv_data = dict['data'] #without next //todo foreach
+    conv_data = dict['data'] #without next
     print(conv_data)
     data_json = {}
     message = []
